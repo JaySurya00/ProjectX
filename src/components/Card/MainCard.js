@@ -5,7 +5,6 @@ import Likes from './Likes';
 import Delete from './Delete';
 import Bookmark from './Bookmark';
 import { authenticate } from '@/lib/auth';
-import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
 const MainCard = async ({ postType, img_url, postId, author }) => {

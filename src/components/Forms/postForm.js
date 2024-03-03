@@ -1,29 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Input, Modal, Select, message, DatePicker, Space } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { addPostAction } from '@/app/actionForm';
-import {useDropzone} from 'react-dropzone'
+import { useRouter } from 'next/navigation'
 
 const { Option } = Select;
 
-const PostForm = ({ isPostFormOpen, setPostFormOpen }) => {
-    const [messageApi, contextHolder] = message.useMessage();
 
+const PostForm = ({ isPostFormOpen, setPostFormOpen }) => {
+    const [form] = Form.useForm();
+    const router= useRouter();
+    const [postType, setPostType] = useState('');
+    console.log('Post Type:', form.getFieldValue('postType'));
+    const [messageApi, contextHolder] = message.useMessage();
     const handleFinish = async (postData) => {
-        const {title, description, releaseYear: year, img_url, postType, genre}=postData;
-        await addPostAction({title, description, year:year.$y, img_url, postType, genre});
+        const { title, description, releaseYear: year, img_url, postType, genre } = postData;
+        await addPostAction({ title, description, year: year.$y, img_url, postType, genre });
         setPostFormOpen(false);
         messageApi.success('Post Added');
+        form.resetFields(); // Reset form fields after submission
+        router.refresh();
+
     };
 
     const handleCancel = () => {
         setPostFormOpen(false);
+        form.resetFields(); // Reset form fields on cancel
     };
 
     return (
-        <Modal title="Add Post" open={isPostFormOpen} onCancel={handleCancel} footer={null}>
+        <Modal forceRender title="Add Post" open={isPostFormOpen} onCancel={handleCancel} footer={null}>
             {contextHolder}
             <Form
+                form={form}
                 name="post-form"
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 16 }}
@@ -36,12 +45,12 @@ const PostForm = ({ isPostFormOpen, setPostFormOpen }) => {
                     name="postType"
                     rules={[{ required: true, message: 'Please select the Post type!' }]}
                 >
-                    <Select style={{ width: '100%' }}>
+                    <Select style={{ width: '100%' }} onChange={(value) => setPostType(value)}>
                         <Option value="Movie">Movie</Option>
                         <Option value="Anime">Anime</Option>
-                        <Option value="TV">TV/OTT Series</Option>
                     </Select>
                 </Form.Item>
+
                 <Form.Item
                     label="Title"
                     name="title"
@@ -51,31 +60,64 @@ const PostForm = ({ isPostFormOpen, setPostFormOpen }) => {
                 </Form.Item>
 
                 <Form.Item
-                    label="Year of Release"
+                    label="Release Year"
                     name="releaseYear"
                     rules={[{ required: true, message: 'Please select the year of release!' }]}
                 >
-                    <DatePicker picker="year" style={{ width: '100%' }} />
+                    <DatePicker picker="year" />
                 </Form.Item>
 
                 <Form.Item
                     label="Description"
                     name="description"
-                    rules={[{ required: true, message: 'Please input the short description of film' }]}
+                    rules={[{ required: true, message: 'Please input the short description of the film' }]}
                 >
-                    <TextArea rows={4} />
+                    <TextArea rows={5} />
                 </Form.Item>
+                {form.getFieldValue('postType') === 'Movie' && (
+                    <Form.Item
+                        label="Genre"
+                        name="genre"
+                        rules={[{ required: true, message: 'Please select the genre!' }]}
+                    >
+                        <Select
+                            mode="multiple"
+                            style={{ width: '100%' }}
+                            placeholder="Select movie genres"
+                        >
+                            {/* Movie genre options */}
+                            <Option value="Action">Action</Option>
+                            <Option value="Adventure">Adventure</Option>
+                            <Option value="Comedy">Comedy</Option>
+                            {/* Add more movie genres as needed */}
+                        </Select>
+                    </Form.Item>
+                )}
+
+                {form.getFieldValue('postType') === 'Anime' && (
+                    <Form.Item
+                        label="Genre"
+                        name="genre"
+                        rules={[{ required: true, message: 'Please select the genre!' }]}
+                    >
+                        <Select
+                            mode="multiple"
+                            style={{ width: '100%' }}
+                            placeholder="Select anime genres"
+                        >
+                            {/* Anime genre options */}
+                            <Option value="Kodomomuke">Kodomomuke</Option>
+                            <Option value="Shonen">Shonen</Option>
+                            <Option value="Shoujo">Shoujo</Option>
+                            <Option value="Seinen">Seinen</Option>
+                            <Option value="Josei">Josei</Option>
+                            {/* Add more anime genres as needed */}
+                        </Select>
+                    </Form.Item>
+                )}
 
                 <Form.Item
-                    label="Genre"
-                    name="genre"
-                    rules={[{ required: true, message: 'Please select the genre!' }]}
-                >
-                    <Input />
-                </Form.Item>
-
-                <Form.Item
-                    label="Poster Image URL"
+                    label="Image URL"
                     name="img_url"
                     rules={[{ required: true, message: 'Please input the image URL!' }]}
                 >
@@ -95,3 +137,4 @@ const PostForm = ({ isPostFormOpen, setPostFormOpen }) => {
 };
 
 export default PostForm;
+

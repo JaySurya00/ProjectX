@@ -1,21 +1,20 @@
 import { loginAction } from '@/app/actionForm';
 import { Form, Button, Input, Modal, message } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useAuth } from '@/app/auth-context';
 
 
 const LoginForm = ({ isLoginFormOpen, setLoginFormOpen, setRegistrationFormOpen }) => {
-    const [ messageApi, contextHolder ]= message.useMessage();
-    const {login}= useAuth();
+    const [messageApi, contextHolder] = message.useMessage();
+    const { login } = useAuth();
     const handleSubmit = async (formData) => {
-        const userData= await loginAction(formData);
-        if(userData)
-        {
-            const {id, name}= userData;
-            login({userId: id, name});
+        const userData = await loginAction(formData);
+        if (userData) {
+            const { id, name } = userData;
+            login({ userId: id, name });
             setLoginFormOpen(false);
         }
-        else
-        {
+        else {
             messageApi.open({
                 type: 'error',
                 content: 'username or password incorrect'
@@ -27,56 +26,45 @@ const LoginForm = ({ isLoginFormOpen, setLoginFormOpen, setRegistrationFormOpen 
         <Modal title={'SignIn'} open={isLoginFormOpen} onCancel={handleCancel} footer={null}>
             {contextHolder}
             <Form
-                name="login-form"
-                labelCol={{
-                    span: 8,
-                }}
-                wrapperCol={{
-                    span: 16,
-                }}
-                style={{
-                    maxWidth: 600,
+                name="normal_login"
+                className="login-form"
+                initialValues={{
+                    remember: true,
                 }}
                 onFinish={handleSubmit}
-                autoComplete="off"
             >
                 <Form.Item
-                    label="Username"
                     name="username"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your username!',
+                            message: 'Please input your Username!',
                         },
                     ]}
                 >
-                    <Input />
+                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
                 </Form.Item>
-
                 <Form.Item
-                    label="Password"
                     name="password"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your password!',
+                            message: 'Please input your Password!',
                         },
                     ]}
                 >
-                    <Input.Password />
+                    <Input
+                        prefix={<LockOutlined className="site-form-item-icon" />}
+                        type="password"
+                        placeholder="Password"
+                    />
                 </Form.Item>
-                <Button type="primary" htmlType="submit" style={{ marginRight: 8 }}>
-                    Submit
-                </Button>
-                <Button onClick={handleCancel} style={{ marginRight: 8 }}>
-                    Cancel
-                </Button>
-                <Button onClick={()=>{
-                    setRegistrationFormOpen(true);
-                    setLoginFormOpen(false);
-                    }}>
-                    Create New Account
-                </Button>
+                <Form.Item>
+                    <Button type="primary" htmlType="submit" className="login-form-button">
+                        Log in
+                    </Button>
+                    Or <a href="">register now!</a>
+                </Form.Item>
             </Form>
         </Modal>
     )
