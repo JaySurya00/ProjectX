@@ -9,7 +9,7 @@ const RegistrationForm = ({ isRegistrationFormOpen, setRegistrationFormOpen }) =
     const [messageApi, contextHolder] = message.useMessage();
     const handleFinish = async (values) => {
         try {
-            const {user, error} = await registrationAction(values);
+            const {user, error} = JSON.parse(await registrationAction(values));
             if(error)
             {
                 return messageApi.error('Username already in use');

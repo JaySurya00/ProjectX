@@ -25,10 +25,10 @@ export const registrationAction = async (formData) => {
             httpOnly: true,
             path: '/',
         })
-        return { user: newUser, error: null };
+        return JSON.stringify({ user: newUser, error: null });
     }
     catch (e) {
-        console.log(e);
+        console.log('Error from registraion Form',e);
     }
 }
 

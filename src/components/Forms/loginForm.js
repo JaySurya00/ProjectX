@@ -63,7 +63,10 @@ const LoginForm = ({ isLoginFormOpen, setLoginFormOpen, setRegistrationFormOpen 
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button>
-                    Or <a href="">register now!</a>
+                    Or <a onClick={() => {
+                        setLoginFormOpen(false);
+                        setRegistrationFormOpen(true);
+                    }}>register now!</a>
                 </Form.Item>
             </Form>
         </Modal>

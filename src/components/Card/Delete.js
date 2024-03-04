@@ -9,7 +9,9 @@ import { useRouter } from 'next/navigation'
 const Delete = ({postId }) => {
   const router= useRouter();
   const [isPending, startTransition] = useTransition();
-  const deleteButtonHandler = async () => {
+  const deleteButtonHandler = async (event) => {
+    event.stopPropagation();
+    event.preventDefault();
     startTransition(async () => {
         deletePostAction(postId);
     });

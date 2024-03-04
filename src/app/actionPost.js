@@ -17,16 +17,16 @@ export const getPosts = async () => {
     }
 }
 
-export const queryPosts= async(query={})=>{
+export const queryPosts = async (query = {}) => {
     console.log('query is', query);
-    const posts= await Posts.find(query);
+    const posts = await Posts.find(query);
     console.log('post is', posts);
     return posts;
 }
 
-export const getUserPosts= async (userId)=>{
+export const getUserPosts = async (userId) => {
     try {
-        const posts = await Posts.find({author: userId});
+        const posts = await Posts.find({ author: userId });
         return posts;
     }
     catch (e) {
@@ -44,8 +44,8 @@ export const getPostbyId = async (postId) => {
     }
 }
 
-export const sortPostLikes= async()=>{
-    const posts= await Posts.find().sort({'likes': -1});
+export const sortPostLikes = async () => {
+    const posts = await Posts.find().sort({ 'likes': -1 });
     return posts;
 }
 

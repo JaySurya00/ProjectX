@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
     const [AuthState, setAuthState] = useState(intialAuthState);
     console.log(AuthState);
     useEffect(() => {
-        const checkAuthentication= async ()=>{
+        const checkAuthentication = async () => {
             const { user, isLoggedIn } = await authenticate();
             if (isLoggedIn) {
                 setAuthState({ user: user, isLoggedIn });
@@ -22,21 +22,21 @@ const AuthProvider = ({ children }) => {
         }
         checkAuthentication();
     }, [])
-    
-const login = (userData) => {
-    setAuthState({
-        user: userData,
-        isLoggedIn: true,
-    })
-}
-const logout = () => {
-    deleteCookie();
-    setAuthState(intialAuthState);
-}
 
-return (
-    <AuthContext.Provider value={{ AuthState, login, logout }}>{children}</AuthContext.Provider>
-)
+    const login = (userData) => {
+        setAuthState({
+            user: userData,
+            isLoggedIn: true,
+        })
+    }
+    const logout = () => {
+        deleteCookie();
+        setAuthState(intialAuthState);
+    }
+
+    return (
+        <AuthContext.Provider value={{ AuthState, login, logout }}>{children}</AuthContext.Provider>
+    )
 }
 
 export const useAuth = () => {

@@ -8,6 +8,7 @@ const { Option } = Select;
 
 
 const PostForm = ({ isPostFormOpen, setPostFormOpen }) => {
+    const isImage = (url) => /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
     const router = useRouter();
     const [postType, setPostType] = useState('');
     const [messageApi, contextHolder] = message.useMessage();
@@ -16,8 +17,8 @@ const PostForm = ({ isPostFormOpen, setPostFormOpen }) => {
         await addPostAction({ title, description, year: year.$y, img_url, postType, genre });
         setPostFormOpen(false);
         messageApi.success('Post Added');
-        router.refresh();
         setPostType('');
+        router.refresh();
     };
 
     const handleCancel = () => {
@@ -114,7 +115,16 @@ const PostForm = ({ isPostFormOpen, setPostFormOpen }) => {
                 <Form.Item
                     label="Image URL"
                     name="img_url"
-                    rules={[{ required: true, message: 'Please input the image URL!' }]}
+                    rules={[{ required: true, message: 'Please input the image URL!' },
+                    {
+                        validator: (_, value) => {
+                            if (isImage(value)) {
+                                return Promise.resolve();
+                            }
+                            return Promise.reject('Invalid image URL. Please provide a valid image URL.');
+                        },
+                    },
+                ]}
                 >
                     <Input />
                 </Form.Item>

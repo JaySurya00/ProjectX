@@ -11,7 +11,7 @@ import menuItems from './menuItems';
 
 const MainNav = () => {
   const [current, setCurrent] = useState('home');
-  const { AuthState, login, logout } = useAuth();
+  const { AuthState, logout } = useAuth();
   const [isLoginFormOpen, setLoginFormOpen] = useState(false);
   const [isRegistrationFormOpen, setRegistrationFormOpen] = useState(false);
   const [isPostFormOpen, setPostFormOpen] = useState(false);

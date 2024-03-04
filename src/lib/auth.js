@@ -18,7 +18,7 @@ export const authenticate = async () => {
         return { user: null, isLoggedIn: false };
     }
     catch (e) {
-        
+        cookieStore.delete('token');
         return {user: null, isLoggedIn: false}
     }
 }

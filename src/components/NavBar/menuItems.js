@@ -95,10 +95,6 @@ const menuItems = (AuthState) => {
             icon: <UserOutlined />,
             children: AuthState.isLoggedIn ? [
                 {
-                    label: 'Profile',
-                    key: 'profile',
-                },
-                {
                     label: 'Logout',
                     key: 'logout',
                 },

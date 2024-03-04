@@ -1,17 +1,13 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+const uri = `mongodb+srv://jaysurya00:Jay%40surya2001@projectscluster.aykhspt.mongodb.net/?retryWrites=true&w=majority&appName=ProjectsCluster`
 
-const MONGODB_URI= 'mongodb://127.0.0.1:27017/projectx';
-
-const connectDB= async ()=>{
-    try {
-          await mongoose.connect(MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-          });
-          console.log('Connected to MongoDB');
-      } catch (error) {
-        console.error('Error connecting to MongoDB:', error);
-      }
+export default async function connectDB() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    mongoose.connect(uri, {dbName: 'ProjectX'});
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  }
+  catch (e) {
+    console.log('from DB', e);
+  }
 }
-
-export default connectDB;
