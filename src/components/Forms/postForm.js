@@ -68,7 +68,7 @@ const PostForm = ({ isPostFormOpen, setPostFormOpen }) => {
                     name="description"
                     rules={[{ required: true, message: 'Please input the short description of the film' }]}
                 >
-                    <TextArea rows={5} />
+                    <TextArea rows={5}/>
                 </Form.Item>
                 {postType === 'Movie' && (
                     <Form.Item
@@ -85,6 +85,11 @@ const PostForm = ({ isPostFormOpen, setPostFormOpen }) => {
                             <Option value="Action">Action</Option>
                             <Option value="Adventure">Adventure</Option>
                             <Option value="Comedy">Comedy</Option>
+                            <Option value="Drama">Drama</Option>
+                            <Option value="Fantasy">Fantasy</Option>
+                            <Option value="Horror">Horror</Option>
+                            <Option value="SciFi">SciFi</Option>
+                            <Option value="Thriller">Thriller</Option>
                             {/* Add more movie genres as needed */}
                         </Select>
                     </Form.Item>
