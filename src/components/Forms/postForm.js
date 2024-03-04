@@ -8,31 +8,26 @@ const { Option } = Select;
 
 
 const PostForm = ({ isPostFormOpen, setPostFormOpen }) => {
-    const [form] = Form.useForm();
-    const router= useRouter();
+    const router = useRouter();
     const [postType, setPostType] = useState('');
-    console.log('Post Type:', form.getFieldValue('postType'));
     const [messageApi, contextHolder] = message.useMessage();
     const handleFinish = async (postData) => {
         const { title, description, releaseYear: year, img_url, postType, genre } = postData;
         await addPostAction({ title, description, year: year.$y, img_url, postType, genre });
         setPostFormOpen(false);
         messageApi.success('Post Added');
-        form.resetFields(); // Reset form fields after submission
         router.refresh();
-
+        setPostType('');
     };
 
     const handleCancel = () => {
         setPostFormOpen(false);
-        form.resetFields(); // Reset form fields on cancel
     };
 
     return (
         <Modal forceRender title="Add Post" open={isPostFormOpen} onCancel={handleCancel} footer={null}>
             {contextHolder}
             <Form
-                form={form}
                 name="post-form"
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 16 }}
@@ -74,7 +69,7 @@ const PostForm = ({ isPostFormOpen, setPostFormOpen }) => {
                 >
                     <TextArea rows={5} />
                 </Form.Item>
-                {form.getFieldValue('postType') === 'Movie' && (
+                {postType === 'Movie' && (
                     <Form.Item
                         label="Genre"
                         name="genre"
@@ -94,7 +89,7 @@ const PostForm = ({ isPostFormOpen, setPostFormOpen }) => {
                     </Form.Item>
                 )}
 
-                {form.getFieldValue('postType') === 'Anime' && (
+                {postType === 'Anime' && (
                     <Form.Item
                         label="Genre"
                         name="genre"

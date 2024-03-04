@@ -6,14 +6,22 @@ import Posts from "@/model/post";
 connectDB();
 
 
-export const getPosts = async (skip=1) => {
+export const getPosts = async () => {
     try {
+
         const posts = await Posts.find();
         return posts;
     }
     catch (e) {
         console.log(e);
     }
+}
+
+export const queryPosts= async(query={})=>{
+    console.log('query is', query);
+    const posts= await Posts.find(query);
+    console.log('post is', posts);
+    return posts;
 }
 
 export const getUserPosts= async (userId)=>{
@@ -34,6 +42,11 @@ export const getPostbyId = async (postId) => {
     catch (e) {
         console.log(e);
     }
+}
+
+export const sortPostLikes= async()=>{
+    const posts= await Posts.find().sort({'likes': -1});
+    return posts;
 }
 
 export const likesAction = async (postId, userId) => {

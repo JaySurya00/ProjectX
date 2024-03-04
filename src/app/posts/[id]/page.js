@@ -20,7 +20,6 @@ const roboto = Roboto({
 export default async function Posts({ params }) {
     const postId = params.id;
     const post = await getPostbyId(postId);
-    console.log(post.reviews);
     const reviews = post?.reviews?.map((reviewData) => {
         return (
             {
@@ -33,6 +32,7 @@ export default async function Posts({ params }) {
     })
     const { likes } = await getLikesForPost(postId)
     const bookmarksCount = await getBookmarkCount(postId);
+    const reviewCount= reviews.length;
 
     const cardStyle = {
         width: 250,
@@ -54,7 +54,7 @@ export default async function Posts({ params }) {
                 <Flex justify='start'>
                     <div style={{ marginRight: '8px' }}>{likes}<LikeFilled /></div>
                     <div style={{ marginRight: '8px' }}>{bookmarksCount}<BookFilled /></div>
-                    <div style={{ marginRight: '8px' }}>50 <MessageFilled /></div>
+                    <div style={{ marginRight: '8px' }}>{reviewCount} <MessageFilled /></div>
                 </Flex>
             </Col>
             <Col xs={24} sm={16} md={12} lg={8} >

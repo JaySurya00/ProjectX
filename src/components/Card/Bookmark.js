@@ -3,10 +3,13 @@ import { useEffect, useState, useTransition } from 'react';
 import { checkBookmarked, addBookmarkAction } from '@/app/actionModel';
 import { Flex, Button, message } from 'antd';
 import { BookFilled, BookOutlined } from '@ant-design/icons';
+import { useRouter } from 'next/navigation'
+
 
 
 const Bookmark = ({ userId, postId }) => {
     const [isBookmarked, setBookmarked]= useState(false);
+    const router= useRouter();
     useEffect(()=>{
         const checkIfBookmarked= async ()=>{
             const state= await checkBookmarked(userId, postId);
@@ -23,6 +26,7 @@ const Bookmark = ({ userId, postId }) => {
             const state= await checkBookmarked(userId, postId);
             setBookmarked(state);
         });
+        router.refresh();
     }
 
     return (

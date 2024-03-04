@@ -19,13 +19,22 @@ const MainNav = () => {
   const router = useRouter();
 
   const onClick = (e) => {
+    console.log('key is', e);
     if (!AuthState.isLoggedIn) {
       if (['addpost', 'mypost', 'bookmarks'].includes(e.key)) {
-        messageApi.info('Please signin first');
+        messageApi.info('Please Login');
         return;
       }
     }
     setCurrent(e.key);
+    if (e.keyPath.includes('genre')) {
+      if (e.keyPath.includes('movie')) {
+        router.push(`/category/movies/${e.key}`);
+        return;
+      }
+      router.push(`/category/animes/${e.key}`);
+      return;
+    }
     switch (e.key) {
       case 'user':
         setLoginFormOpen(true);
@@ -35,6 +44,9 @@ const MainNav = () => {
         break;
       case 'home':
         router.push('/');
+        break;
+      case 'mostlikes':
+        router.push('/most-likes');
         break;
       case 'addpost':
         setPostFormOpen(true);

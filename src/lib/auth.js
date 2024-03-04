@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import * as jose from 'jose';
 
 const secret = new TextEncoder().encode(
-    'muskansinghvi',
+    process.env.SECRET_KEY
   )
 
 export const authenticate = async () => {
@@ -18,7 +18,7 @@ export const authenticate = async () => {
         return { user: null, isLoggedIn: false };
     }
     catch (e) {
-        console.log(e);
-        return { user: null, isLoggedIn: false };
+        
+        return {user: null, isLoggedIn: false}
     }
 }

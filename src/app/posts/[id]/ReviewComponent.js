@@ -6,8 +6,10 @@ import { Button, Space } from 'antd';
 import { addReviewAction } from '@/app/actionModel';
 import { useAuth } from '@/app/auth-context';
 import {message} from 'antd'
+import { useRouter } from 'next/navigation'
 
 export default function Review({postId}) {
+    const router= useRouter();
     const [value, setValue] = useState('');
     const {AuthState}= useAuth();
     const [messageApi, contextHolder]= message.useMessage();
@@ -20,6 +22,7 @@ export default function Review({postId}) {
         await addReviewAction(postId, reviewBody);
         messageApi.info('Review Added');
         setValue('');
+        router.refresh();
     }
     return (
         <>

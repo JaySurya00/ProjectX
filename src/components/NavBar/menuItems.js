@@ -7,6 +7,10 @@ const menuItems = (AuthState) => {
             key: 'home',
         },
         {
+            label: 'Most Likes',
+            key: 'mostlikes'
+        },
+        {
             label: 'Genre',
             key: 'genre',
             children: [
@@ -70,7 +74,7 @@ const menuItems = (AuthState) => {
                         }
 
                     ]
-                }
+                },
             ]
         },
         {

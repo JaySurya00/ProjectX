@@ -5,7 +5,6 @@ import { getPosts } from "./actionPost";
 
 export default async function Home() {
   const posts = await getPosts();
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <Row gutter={[8, 16]} justify="start">
