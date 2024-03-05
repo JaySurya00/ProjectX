@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const { Schema, model, ObjectId } = mongoose;
-import connectDB from "@/utils/connectDB";
-connectDB();
+const DB_URI= process.env.URI;
+mongoose.connect(DB_URI);
 
 const postSchema = new Schema({
     postType: {

@@ -23,7 +23,6 @@ export default async function Posts({ params }) {
     const {user}= await authenticate();
     const postId = params.id;
     const post = await getPostbyId(postId);
-    console.log(post);
     const reviews = post?.reviews?.map((reviewData) => {
         return (
             {
