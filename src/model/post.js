@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 const { Schema, model, ObjectId } = mongoose;
+import connectDB from "@/utils/connectDB";
+connectDB();
 
 const postSchema = new Schema({
     postType: {

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const URI= process.env.URI;
-
+console.log(URI);
 const connectDB= async ()=>{
     try{
         await mongoose.connect(URI,{dbName: 'ProjectX'});

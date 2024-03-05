@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 const { Schema, model} = mongoose;
+import connectDB from "@/utils/connectDB";
+connectDB();
 
 
 const userSchema= new Schema({
