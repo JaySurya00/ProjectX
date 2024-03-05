@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 const { Schema, model} = mongoose;
-const DB_URI= process.env.URI;
-mongoose.connect(DB_URI);
 
 
 const userSchema= new Schema({

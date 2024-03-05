@@ -4,6 +4,8 @@ import Posts from "@/model/post";
 import User from "@/model/user";
 import { generateToken } from "@/utils/generateToken";
 import { authenticate } from '@/lib/auth';
+import mongoose from "mongoose";
+await mongoose.connect(process.env.URI)
 
 export const registrationAction = async (formData) => {
 
