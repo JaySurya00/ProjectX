@@ -3,7 +3,7 @@ const URI= process.env.URI;
 
 const connectDB= async ()=>{
     try{
-        await mongoose.createConnection(URI,{dbName: 'ProjectX'}).asPromise();
+        await mongoose.connect(URI,{dbName: 'ProjectX'});
         console.log('Connected to MonogoDB');
     }
    catch(e)
@@ -11,4 +11,5 @@ const connectDB= async ()=>{
     console.log('Error from DB', e);
    }
 }
-connectDB();
+
+export default connectDB;

@@ -16,15 +16,28 @@ const AuthProvider = ({ children }) => {
         const checkAuthentication = async () => {
             const { user, isLoggedIn } = await authenticate();
             if (isLoggedIn) {
-                setAuthState({ user: user, isLoggedIn });
+                setAuthState(
+                    {
+                        user: {
+                            userId: user.id,
+                            name: user.name
+                        }, 
+                        isLoggedIn
+                    }
+                );
             }
         }
         checkAuthentication();
     }, [])
 
     const login = (userData) => {
+        console.log('from authcontext', userData);
+        const { userId, name } = userData;
         setAuthState({
-            user: userData,
+            user: {
+                userId: userId,
+                name: name
+            },
             isLoggedIn: true,
         })
     }

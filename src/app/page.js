@@ -2,6 +2,7 @@ import MainCard from "@/components/Card/MainCard";
 import { Row, Col } from 'antd';
 import { getPosts } from "./actionPost";
 
+
 export default async function Home() {
   const posts = await getPosts();
   return (
