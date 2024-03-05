@@ -29,7 +29,7 @@ export const getUserPosts = async (userId) => {
 
 export const getPostbyId = async (postId) => {
     try {
-        const post = await Posts.findById(postId).populate('reviews.author');
+        const post = await Posts.findById(postId).populate('author').populate('reviews.author');
         return post;
     }
     catch (e) {

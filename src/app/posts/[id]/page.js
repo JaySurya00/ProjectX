@@ -23,6 +23,7 @@ export default async function Posts({ params }) {
     const {user}= await authenticate();
     const postId = params.id;
     const post = await getPostbyId(postId);
+    console.log(post);
     const reviews = post?.reviews?.map((reviewData) => {
         return (
             {
@@ -65,7 +66,8 @@ export default async function Posts({ params }) {
             <Col xs={24} sm={16} md={12} lg={8} >
                 <div className={roboto.className}>
                     <h1>{post.title}</h1>
-                    <p> <span style={{ fontWeight: 'bold' }}>Year</span>: {post.year} <span style={verticalDividerStyle}></span> <span style={{ fontWeight: 'bold' }}>Genre</span>: {post.genre}</p>
+                    <p> <span style={{ fontWeight: 'bold' }}>Year</span>: {post.year} <span style={verticalDividerStyle}></span> <span style={{ fontWeight: 'bold' }}>Genre</span>: {post.genre.join(', ')} <span style={verticalDividerStyle}></span><span style={{ fontWeight: 'bold' }}>Posted By:
+                    </span> {post.author.username}</p>
                     <p>{post.description}</p>
                 </div>
                 <p style={{ marginBottom: '0', fontWeight: 'bold', fontSize: '15px' }}>Reviews</p>
