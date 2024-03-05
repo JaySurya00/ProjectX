@@ -4,10 +4,6 @@ import Posts from "@/model/post";
 import User from "@/model/user";
 import { generateToken } from "@/utils/generateToken";
 import { authenticate } from '@/lib/auth';
-import connectDB from "@/utils/connectDB";
-connectDB()
-
-
 
 export const registrationAction = async (formData) => {
 

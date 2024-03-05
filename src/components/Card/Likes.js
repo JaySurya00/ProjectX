@@ -14,7 +14,7 @@ const Likes = ({ postId, userId = null, isLoggedIn }) => {
       setUserLiked(isUserLiked);
     }
     getLikes();
-  }, [userId])
+  }, [userId,postId])
 
   const [isPending, startTransition] = useTransition();
 

@@ -8,6 +8,6 @@ export default async function connectDB() {
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   }
   catch (e) {
-    console.log('from DB', e);
+    console.log('Error from DB', e);
   }
 }
