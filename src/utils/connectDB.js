@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-const uri = `mongodb+srv://jaysurya00:Jay%40surya2001@projectscluster.aykhspt.mongodb.net/?retryWrites=true&w=majority&appName=ProjectsCluster`
+const uri = process.env.URI;
 
 export default async function connectDB() {
   try {

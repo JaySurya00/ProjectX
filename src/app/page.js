@@ -1,7 +1,8 @@
 import MainCard from "@/components/Card/MainCard";
 import { Row, Col } from 'antd';
 import { getPosts } from "./actionPost";
-
+import connectDB from "@/utils/connectDB";
+connectDB();
 
 export default async function Home() {
   const posts = await getPosts();

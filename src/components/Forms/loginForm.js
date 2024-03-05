@@ -3,7 +3,6 @@ import { Form, Button, Input, Modal, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useAuth } from '@/app/auth-context';
 
-
 const LoginForm = ({ isLoginFormOpen, setLoginFormOpen, setRegistrationFormOpen }) => {
     const [messageApi, contextHolder] = message.useMessage();
     const { login } = useAuth();

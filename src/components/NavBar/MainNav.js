@@ -19,7 +19,6 @@ const MainNav = () => {
   const router = useRouter();
 
   const onClick = (e) => {
-    console.log('key is', e);
     if (!AuthState.isLoggedIn) {
       if (['addpost', 'mypost', 'bookmarks'].includes(e.key)) {
         messageApi.info('Please Login');

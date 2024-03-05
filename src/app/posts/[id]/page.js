@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Col, Row, Card, Flex, Divider, Space } from 'antd';
 import { getBookmarkCount } from '@/app/actionModel';
 import { getLikesForPost } from '@/app/actionPost';
@@ -8,6 +8,8 @@ import { LikeFilled, BookFilled, MessageFilled } from '@ant-design/icons';
 import Review from './ReviewComponent';
 
 import { Roboto } from 'next/font/google'
+import { authenticate } from '@/lib/auth';
+import DeleteReview from '../DeleteReview';
 
 const roboto = Roboto({
     weight: '400',
@@ -18,6 +20,7 @@ const roboto = Roboto({
 
 
 export default async function Posts({ params }) {
+    const {user}= await authenticate();
     const postId = params.id;
     const post = await getPostbyId(postId);
     const reviews = post?.reviews?.map((reviewData) => {
@@ -26,6 +29,8 @@ export default async function Posts({ params }) {
                 authorId: reviewData.author._id.toString(),
                 authorName: reviewData.author.firstName + ' ' + reviewData.author.lastName,
                 review: reviewData.review,
+                date:reviewData.date,
+                id: reviewData._id
             }
         )
 
@@ -67,11 +72,14 @@ export default async function Posts({ params }) {
                 <Divider style={{ marginTop: '0' }} />
                 {reviews?.map((review) => {
                     return (
-                        <>
-                            <p style={{ color: 'GrayText', fontFamily: 'Roboto' }}>Review by:<span style={{ color: 'black', fontFamily: 'Roboto' }}> {review.authorName}</span></p>
+                        <Fragment key={review.id}>
+                            <Flex justify='space-between'>
+                                <p style={{ color: 'GrayText', fontFamily: 'Roboto' }}>Review by:<span style={{ color: 'black', fontFamily: 'Roboto' }}> {review.authorName}</span><span style={{ color: 'GrayText', fontFamily: 'Roboto' }}>{' '+review.date.getDate()+'/'+review.date.getMonth()+'/'+review.date.getFullYear()}</span></p>
+                                {user?.id===review?.authorId && <DeleteReview reviewId={review.id.toString()} postId={postId}/>}
+                            </Flex>
                             <p style={{ fontFamily: 'Roboto' }}>{review.review}</p>
                             <Divider />
-                        </>
+                        </Fragment>
                     )
                 })}
             </Col>

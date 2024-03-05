@@ -12,7 +12,6 @@ const AuthContext = createContext(intialAuthState);
 
 const AuthProvider = ({ children }) => {
     const [AuthState, setAuthState] = useState(intialAuthState);
-    console.log(AuthState);
     useEffect(() => {
         const checkAuthentication = async () => {
             const { user, isLoggedIn } = await authenticate();

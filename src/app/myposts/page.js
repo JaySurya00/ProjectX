@@ -4,7 +4,7 @@ import MainCard from "@/components/Card/MainCard";
 import { Row, Col } from 'antd'
 
 const MyPosts = async () => {
-    const { user, isLoggedIn } = await authenticate();
+    const { user } = await authenticate();
     const posts = await getUserPosts(user?.id);
     return (
         <>

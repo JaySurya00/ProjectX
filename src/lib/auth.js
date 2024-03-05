@@ -1,7 +1,6 @@
 'use server'
 import { cookies } from "next/headers";
 import * as jose from 'jose';
-
 const secret = new TextEncoder().encode(
     process.env.SECRET_KEY
   )
@@ -18,7 +17,7 @@ export const authenticate = async () => {
         return { user: null, isLoggedIn: false };
     }
     catch (e) {
-        cookieStore.delete('token');
+        console.log('from auth',e.message)
         return {user: null, isLoggedIn: false}
     }
 }

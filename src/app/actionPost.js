@@ -1,9 +1,6 @@
 'use server'
-import connectDB from "@/utils/connectDB";
 import Posts from "@/model/post";
 
-
-connectDB();
 
 
 export const getPosts = async () => {
@@ -18,9 +15,7 @@ export const getPosts = async () => {
 }
 
 export const queryPosts = async (query = {}) => {
-    console.log('query is', query);
     const posts = await Posts.find(query);
-    console.log('post is', posts);
     return posts;
 }
 
@@ -81,4 +76,8 @@ export const getLikesForPost = async (postId, userId) => {
 
 export const deletePostAction = async (postId) => {
     await Posts.findByIdAndDelete(postId);
+}
+
+export const deletePostReview= async (postId, reviewId)=>{
+    await Posts.updateOne({ _id: postId }, { $pull: { reviews:{ _id: reviewId } }})
 }

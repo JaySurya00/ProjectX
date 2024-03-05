@@ -1,11 +1,6 @@
 'use server'
-import connectDB from "@/utils/connectDB";
 import Posts from "@/model/post";
 import User from "@/model/user";
-
-
-
-connectDB();
 
 export const addBookmarkAction = async (userId, postId) => {
     const user = await User.findById(userId);

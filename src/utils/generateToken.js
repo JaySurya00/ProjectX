@@ -1,6 +1,6 @@
 import * as jose from 'jose';
 const secret = new TextEncoder().encode(
-    process.env.SECRET_KEY,
+    process.env.SECRET_KEY
   )
 export const generateToken= async (userData)=>{
     const {_id:id, firstName, lastName }=   userData;

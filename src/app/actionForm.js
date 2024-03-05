@@ -1,13 +1,10 @@
 'use server'
 import { cookies } from 'next/headers'
-import connectDB from "@/utils/connectDB";
 import Posts from "@/model/post";
 import User from "@/model/user";
 import { generateToken } from "@/utils/generateToken";
 import { authenticate } from '@/lib/auth';
 
-
-connectDB();
 
 export const registrationAction = async (formData) => {
 
@@ -60,6 +57,7 @@ export const addPostAction = async (formData) => {
         Response.json('Post Addded', {status: 201});
     }
     catch (e) {
+        Response.json('Internal Error', {status: 500});
         console.log(e);
     }
 }

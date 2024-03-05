@@ -15,10 +15,9 @@ export default function Review({postId}) {
     const [messageApi, contextHolder]= message.useMessage();
     const addReviewHandler= async ()=>{
         const reviewBody= {
-            author:AuthState.user.id,
+            author:AuthState.user.userId,
             review: value,
         }
-        console.log(reviewBody);
         await addReviewAction(postId, reviewBody);
         messageApi.info('Review Added');
         setValue('');

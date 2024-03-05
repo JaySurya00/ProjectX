@@ -38,13 +38,17 @@ const postSchema = new Schema({
     likes: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'User'
+            ref:  'User'
         }
     ],
     reviews: [
         {
             author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-            review: String
+            review: String,
+            date: {
+                type: Date,
+                default: Date.now()
+            }
         }
     ]
 
