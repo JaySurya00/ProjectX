@@ -1,6 +1,7 @@
 'use server'
 import Posts from "@/model/post";
-
+import connectDB from "@/utils/connectDB";
+connectDB()
 
 
 export const getPosts = async () => {
