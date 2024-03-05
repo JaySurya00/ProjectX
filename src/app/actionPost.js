@@ -1,7 +1,5 @@
 'use server'
 import Posts from "@/model/post";
-import mongoose from "mongoose";
-await mongoose.connect(process.env.URI)
 
 export const getPosts = async () => {
     try {

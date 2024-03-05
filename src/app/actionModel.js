@@ -1,8 +1,7 @@
 'use server'
 import Posts from "@/model/post";
 import User from "@/model/user";
-import mongoose from "mongoose";
-await mongoose.connect(process.env.URI)
+
 
 export const addBookmarkAction = async (userId, postId) => {
     const user = await User.findById(userId);
