@@ -10,7 +10,7 @@ export default async function Home()
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Row gutter={[8, 16]} justify="start">
             {posts?.map((post) => (
-              <Col key={post._id} xs={24} sm={12} md={8} lg={6} xl={4}>
+              <Col key={post._id}>
                 <MainCard
                   img_url={post.img_url}
                   author={post.author.toString()}
