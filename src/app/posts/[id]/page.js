@@ -17,6 +17,14 @@ const roboto = Roboto({
     display: 'swap',
 })
 
+export async function generateMetadata({params})
+{
+    const postId = params.id;
+    const post = await getPostbyId(postId);
+    return ({
+        title: post?.title,
+    })
+}
 
 
 export default async function Posts({ params }) {
