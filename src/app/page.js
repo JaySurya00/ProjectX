@@ -3,7 +3,7 @@ import { Row, Col, Descriptions } from 'antd';
 import { getPosts } from "./actionPost";
 
 export const metadata= {
-  title: 'MovieAnime App',
+  title: 'AnimeFlickForum',
   description: 'A app where user can post movie and anime'
 }
 
